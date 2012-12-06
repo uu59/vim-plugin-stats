@@ -58,7 +58,7 @@ class Crawler
         when /^github:(.*)/, /@github.com:(.*)/ # => github:user/repo
           "https://github.com/#{Regexp.last_match[1]}"
         when /^http/, /^git/ # full repo url
-          symbol
+          symbol.gsub(%r"git://(github.com)", "https://\\1")
         when %r!^[^/]+/([^/]+)$! # username/repo => github
           "https://github.com/#{symbol}"
         when "", nil, ","
