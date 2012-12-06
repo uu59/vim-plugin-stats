@@ -1,6 +1,6 @@
 # Vim plugin stats
 
-![screenshot](https://raw.github.com/uu59/vim-plugin-stats/master/screenshot.png)
+<http://uu59.github.com/vim-plugin-stats/>
 
 ## How it works
 
