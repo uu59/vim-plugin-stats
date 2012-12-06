@@ -50,7 +50,7 @@ class Crawler
         next unless match
         symbol = match[2]
         filename = match[1].gsub(dir, "")
-        config_url = url + filename
+        config_url = "#{url}/blob/master#{filename}"
         next if config_url["vundle/test/vimrc"]
         next if config_url["neobundle.vim/test/vimrc"]
         next if config_url["neobundle/test/vimrc"]
