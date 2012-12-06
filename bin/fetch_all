@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+Bundler.require
+
+Crawler::Repo.known_repos.each do |repo|
+  repo.fetch
+end
+
+puts "Done."
