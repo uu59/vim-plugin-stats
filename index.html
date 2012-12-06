@@ -24,5 +24,21 @@
 </head> 
 <body>
   <h1>vim plugin stats</h1>
+  <p>
+    <a href="https://github.com/uu59/vim-plugin-stats">view on Github</a>
+  </p>
+  <p id="last_modified"></p>
   <script type="text/javascript" src="graph.js"></script>
+  <script>
+    var ms;
+    if(!!window.webkitURL) {
+      // https://developer.mozilla.org/ja/docs/DOM/document.lastModified
+      ms = Date.parse(document.lastModified + " GMT+0000");
+    } else {
+      ms = Date.parse(document.lastModified);
+    }
+    var d = new Date();
+    d.setTime(ms);
+    document.querySelector('#last_modified').innerHTML = "Last update: "+(d)+"";
+  </script>
 </body></html> 
