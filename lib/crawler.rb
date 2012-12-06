@@ -9,7 +9,7 @@ class Crawler
   def explore(*words)
     hydra = Typhoeus::Hydra.new
     repos = []
-    words = %W!vimrc dotfiles vimfiles neobundle vundle! if words.empty?
+    words = %W!vimrc dotfiles vimfiles neobundle vundle myvim! if words.empty?
     words.each do |q|
       3.times do |page|
         req = Typhoeus::Request.new("https://api.github.com/legacy/repos/search/#{q}?start_page=#{page}")
