@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+Bundler.require
+
+c = Crawler.new
+puts "Exploring new config ..."
+repos = c.explore
+repos.each do |repo|
+  repo.clone
+end
+
+puts "Done."

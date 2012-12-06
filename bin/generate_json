@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+Bundler.require
+
+plugins = Crawler::Repo.known_repos.map do |repo|
+  repo.detect_plugins
+end.flatten
+
+
+File.open('raw.json', 'w'){|f| f.write MultiJson.dump(plugins) }
+
+repos = plugins.group_by{|d| d[:plugin][:name] }.sort_by{|name, d| -d.length}.map{|name, d| [name, d.length]}
+File.open('plugins.json', 'w') {|f| f.write MultiJson.dump(repos)}
