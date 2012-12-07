@@ -6,6 +6,16 @@ Bundler.require
 c = Crawler.new
 puts "Exploring new config ..."
 repos = c.explore
+
+ARGV.each do |list|
+  File.open(list) do |file|
+    while line = file.gets
+      line.strip!
+      repos << Crawler::Repo.new(line) if line && line.length > 0
+    end
+  end
+end
+
 Parallel.each(repos, :in_processes => 8) do |repo|
   repo.clone
 end

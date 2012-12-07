@@ -1,0 +1,4 @@
+https://github.com/uu59/vimenv
+https://github.com/Shougo/shougo-s-github
+https://github.com/gmarik/dotfiles
+
