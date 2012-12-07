@@ -4,7 +4,7 @@ source :rubygems
 gem "pry"
 
 gem "multi_json"
-gem "puma"
+gem "parallel"
 gem "typhoeus"
 
 gem "bundler", :require => [

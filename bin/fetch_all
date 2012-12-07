@@ -3,30 +3,8 @@
 require "bundler/setup"
 Bundler.require
 
-require "thread"
-
-$queue = Queue.new
-workers = []
-parallel = 30
-
-parallel.times do
-  workers << Thread.start do
-    loop do
-      repo = $queue.pop
-      break if repo.nil?
-      repo.fetch
-    end
-  end
+Parallel.each(Crawler::Repo.known_repos, :in_processes => 8).each do |repo|
+  repo.fetch
 end
-
-Crawler::Repo.known_repos.each do |repo|
-  $queue.push repo
-end
-
-parallel.times do
-  $queue.push nil
-end
-
-workers.each(&:join)
 
 puts "Done."

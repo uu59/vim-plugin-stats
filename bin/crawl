@@ -3,33 +3,11 @@
 require "bundler/setup"
 Bundler.require
 
-require "thread"
-
-$queue = Queue.new
-workers = []
-parallel = 10
-
-parallel.times do
-  workers << Thread.start do
-    loop do
-      repo = $queue.pop
-      break if repo.nil?
-      repo.clone
-    end
-  end
-end
-
 c = Crawler.new
 puts "Exploring new config ..."
 repos = c.explore
-repos.each do |repo|
-  $queue.push repo
+Parallel.each(repos, :in_processes => 8) do |repo|
+  repo.clone
 end
-
-parallel.times do
-  $queue.push nil
-end
-
-workers.each(&:join)
 
 puts "Done."
