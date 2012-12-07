@@ -9,13 +9,11 @@ GEM
     method_source (0.8.1)
     mime-types (1.19)
     multi_json (1.4.0)
+    parallel (0.5.18)
     pry (0.9.10)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.3.1)
-    puma (1.6.3)
-      rack (~> 1.2)
-    rack (1.4.1)
     slop (3.3.3)
     typhoeus (0.5.3)
       ethon (~> 0.5.3)
@@ -26,6 +24,6 @@ PLATFORMS
 DEPENDENCIES
   bundler
   multi_json
+  parallel
   pry
-  puma
   typhoeus
