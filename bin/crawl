@@ -5,7 +5,7 @@ Bundler.require
 
 c = Crawler.new
 puts "Exploring new config ..."
-repos = c.explore
+repos = c.explore(*%W!vimrc dotfiles vimfiles neobundle vundle myvim my+vim vim+config!)
 
 ARGV.each do |list|
   File.open(list) do |file|
