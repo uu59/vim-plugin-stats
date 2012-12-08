@@ -34,12 +34,12 @@ class Crawler
     end
 
     def clone
-      system(*%W!git clone --depth 1 #{url} #{dir}!) unless File.directory?(dir)
+      system({"GIT_ASKPASS" => "/bin/echo"}, *%W!git clone --depth 1 #{url} #{dir}!) unless File.directory?(dir)
     end
 
     def fetch
       clone
-      unless system(*%W!git --git-dir #{git_dir} pull -f origin master!)
+      unless system({"GIT_ASKPASS" => "/bin/echo"}, *%W!git --git-dir #{git_dir} pull -f origin master!)
         puts dir
       end
     end
