@@ -9,6 +9,9 @@ cd $DIR
 
 # sometimes, confused git leaks some files in $DIR
 git reset --hard HEAD
+git checkout HEAD .
+git clean -fd
+git pull --rebase
 
 ./bin/generate_json
 git add -u
