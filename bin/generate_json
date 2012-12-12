@@ -3,9 +3,10 @@
 require "bundler/setup"
 Bundler.require
 
-count_repos = Crawler::Repo.known_repos.length
+known = Crawler::Repo.known_repos
+count_repos = known.length
 counter = 0
-plugins = Crawler::Repo.known_repos.map do |repo|
+plugins = known.map do |repo|
   print "\rchecking repos .. #{counter += 1} / #{count_repos}"
   repo.detect_plugins
 end.flatten
