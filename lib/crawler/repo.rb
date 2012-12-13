@@ -10,10 +10,17 @@ class Crawler
       end
     end
 
-    def self.known_repos
-      `find #{Crawler::REPO_DIR} -name .git -type d`.lines.map do |gitdir|
-        new(File.dirname(gitdir))
+    def self.known_repos(&block)
+      repos = []
+      IO.popen("find #{Crawler::REPO_DIR} -mindepth 2 -name .git -type d", "r") do |io|
+        until io.eof?
+          gitdir = io.gets.strip
+          repo = new(gitdir)
+          block.call(repo) if block_given?
+          repos << repo
+        end
       end
+      repos
     end
 
     def dir

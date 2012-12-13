@@ -3,7 +3,7 @@
 require "bundler/setup"
 Bundler.require
 
-Parallel.each(Crawler::Repo.known_repos, :in_processes => 8) do |repo|
+Crawler::Repo.known_repos do |repo|
   repo.fetch
 end
 
