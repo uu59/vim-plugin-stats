@@ -46,9 +46,13 @@ class Crawler
 
     def fetch
       clone
-      unless system({"GIT_ASKPASS" => "/bin/false"}, *%W!git --git-dir #{git_dir} pull -f origin master!)
+      _dir = Dir.pwd
+      Dir.chdir(dir)
+      unless system({"GIT_ASKPASS" => "/bin/false"}, *%W!git pull -f origin master!)
         puts dir
       end
+    ensure
+      Dir.chdir(_dir)
     end
 
     def detect_plugins
