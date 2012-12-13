@@ -4,7 +4,7 @@ class Crawler
   class Repo
     def initialize(url_or_dir)
       if url_or_dir[Crawler::REPO_DIR]
-        @dir = url_or_dir
+        @dir = url_or_dir.gsub(/\.git$/, "")
       else
         @url = url_or_dir
       end
@@ -48,7 +48,7 @@ class Crawler
       clone
       _dir = Dir.pwd
       Dir.chdir(dir)
-      unless system({"GIT_ASKPASS" => "/bin/false"}, *%W!git pull -f origin master!)
+      unless system({"GIT_ASKPASS" => "/bin/false"}, *%W!timeout 15 git pull -f origin master!)
         puts dir
       end
     ensure
